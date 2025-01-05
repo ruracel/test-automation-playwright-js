@@ -48,9 +48,13 @@ test.describe('Applications Page', async () => {
         const applicationsPage = new ApplicationsPage(page);
 
         // get all rows
+        
         const allRows = await applicationsPage.getApplicationsTableRows();
+        
         await expect(allRows.length, 'table should have >= ' + applicationsPageSize + ' rows')
             .toBeGreaterThanOrEqual(applicationsPageSize);
+
+        
 
         // search in table
         await applicationsPage.searchInApplicationsTable(applicationsSearchText);
@@ -62,9 +66,16 @@ test.describe('Applications Page', async () => {
             .toBeLessThan(allRows.length);
 
         // iterate over filtered rows
-        for (const row of filteredRows) {
-            const cells = row.locator('td');
-            await expect(await cells.nth(0).textContent()).toContain(applicationsSearchText);
+        
+        for (const row in filteredRows) {
+            console.log(row);
+            const values = await row.getValues();
+            await expect(await values.name).toContain(applicationsSearchText);
         }
+         
+        // for (const row of filteredRows) {
+        //     const cells = row.locator('td');
+        //     await expect(await cells.nth(0).textContent()).toContain(applicationsSearchText);
+        // }
     });
 });

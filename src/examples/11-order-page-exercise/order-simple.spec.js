@@ -14,8 +14,8 @@ const endDate = "2023-05-12";
 test.describe("Objednávka pro MŠ/ZŠ", async () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
-  });
-
+   });
+ 
   test.describe("Navigace", async () => {
     test("Aplikace umožňuje uživateli v menu Pro učitele vytvoření nové objednávky pro MŠ/ZŠ", async ({
       page,
@@ -24,6 +24,7 @@ test.describe("Objednávka pro MŠ/ZŠ", async () => {
       await page.getByRole("link", { name: "Objednávka pro MŠ/ZŠ" }).click();
       await expect(page.locator("h1")).toHaveText("Nová objednávka");
       await expect(page.locator("#ico")).toBeVisible();
+
     });
   });
 
